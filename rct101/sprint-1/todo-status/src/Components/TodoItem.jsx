@@ -7,7 +7,7 @@ const TodoItem = ({ todo, onToggle }) => {
 
   return (
     <div>
-      <li>
+      <li style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
         <input
           type="checkbox"
           checked={todo.completed}
