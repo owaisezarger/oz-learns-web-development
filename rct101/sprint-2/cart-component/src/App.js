@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import CartItem from "./Components/CartItem";
 
@@ -10,12 +10,29 @@ function App() {
     { name: "Item 4", price: 12.99 },
   ];
 
+  const [total, setTotal] = useState(0);
+
+  const addTotalPrice = (price, quantity) => {
+    setTotal((prevTotal) => prevTotal + price * quantity);
+  };
+
+  const subtractTotalPrice = (price, quantity) => {
+    setTotal((prevTotal) => prevTotal - price * quantity);
+  };
+
   return (
     <div className="App">
       <h1>Cart Component</h1>
       {items.map((item, i) => (
-        <CartItem key={i} name={item.name} price={item.price} />
+        <CartItem
+          key={i}
+          name={item.name}
+          addTotalPrice={addTotalPrice}
+          subtractTotalPrice={subtractTotalPrice}
+          price={item.price}
+        />
       ))}
+      <p>Total: ${total.toFixed(2)}</p>
     </div>
   );
 }
